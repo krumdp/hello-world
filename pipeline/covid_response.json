@@ -326,12 +326,6 @@
 						"referenceName": "covidresponse",
 						"type": "DatasetReference"
 					}
-				],
-				"outputs": [
-					{
-						"referenceName": "Oracle_azure",
-						"type": "DatasetReference"
-					}
 				]
 			}
 		],
