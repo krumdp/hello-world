@@ -1,0 +1,17 @@
+{
+	"name": "covidtrigger",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 1,
+				"startTime": "2020-06-09T15:42:00Z",
+				"timeZone": "UTC"
+			}
+		}
+	}
+}

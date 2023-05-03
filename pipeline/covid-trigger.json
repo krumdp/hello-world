@@ -1,0 +1,47 @@
+{
+	"name": "covid-trigger",
+	"properties": {
+		"activities": [
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": {
+						"value": "@pipeline().parameters.waittime",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "MoveFiles_copy_EDW",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Wait1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "MoveFiles_copy_EDW",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"parameters": {
+			"waittime": {
+				"type": "int"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2020-06-13T00:54:30Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

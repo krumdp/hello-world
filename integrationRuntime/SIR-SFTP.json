@@ -1,0 +1,6 @@
+{
+	"name": "SIR-SFTP",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

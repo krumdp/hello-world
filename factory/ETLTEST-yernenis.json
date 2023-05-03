@@ -1,0 +1,9 @@
+{
+	"name": "ETLTEST-yernenis",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c2b6c9cc-caee-44e9-a38e-4d8af694e285",
+		"tenantId": "22177130-642f-41d9-9211-74237ad5687d"
+	}
+}
