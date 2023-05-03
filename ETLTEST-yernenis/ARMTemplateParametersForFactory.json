@@ -17,9 +17,6 @@
 		"MSIData_connectionString": {
 			"value": ""
 		},
-		"Sftp1_password": {
-			"value": ""
-		},
 		"linkedService1_connectionString": {
 			"value": ""
 		},
@@ -30,12 +27,6 @@
 			"value": "\\\\fileshare.msu.edu\\itservices\\departments\\infrastructure\\hal"
 		},
 		"FileServerfinanceproject_properties_typeProperties_userId": {
-			"value": "yernenis"
-		},
-		"Sftp1_properties_typeProperties_host": {
-			"value": "S:\\Projects"
-		},
-		"Sftp1_properties_typeProperties_userName": {
 			"value": "yernenis"
 		}
 	}

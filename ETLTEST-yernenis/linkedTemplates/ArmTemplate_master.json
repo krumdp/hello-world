@@ -23,10 +23,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'MSIData'"
 		},
-		"Sftp1_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Sftp1'"
-		},
 		"linkedService1_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'linkedService1'"
@@ -40,14 +36,6 @@
 			"defaultValue": "\\\\fileshare.msu.edu\\itservices\\departments\\infrastructure\\hal"
 		},
 		"FileServerfinanceproject_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "yernenis"
-		},
-		"Sftp1_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "S:\\Projects"
-		},
-		"Sftp1_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "yernenis"
 		},
@@ -96,20 +84,11 @@
 					"msi_test_connectionString": {
 						"value": "[parameters('msi_test_connectionString')]"
 					},
-					"Sftp1_password": {
-						"value": "[parameters('Sftp1_password')]"
-					},
 					"FileServerfinanceproject_properties_typeProperties_host": {
 						"value": "[parameters('FileServerfinanceproject_properties_typeProperties_host')]"
 					},
 					"FileServerfinanceproject_properties_typeProperties_userId": {
 						"value": "[parameters('FileServerfinanceproject_properties_typeProperties_userId')]"
-					},
-					"Sftp1_properties_typeProperties_host": {
-						"value": "[parameters('Sftp1_properties_typeProperties_host')]"
-					},
-					"Sftp1_properties_typeProperties_userName": {
-						"value": "[parameters('Sftp1_properties_typeProperties_userName')]"
 					}
 				}
 			},

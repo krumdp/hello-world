@@ -31,23 +31,11 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'msi_test'"
 		},
-		"Sftp1_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'Sftp1'"
-		},
 		"FileServerfinanceproject_properties_typeProperties_host": {
 			"type": "string",
 			"defaultValue": "\\\\fileshare.msu.edu\\itservices\\departments\\infrastructure\\hal"
 		},
 		"FileServerfinanceproject_properties_typeProperties_userId": {
-			"type": "string",
-			"defaultValue": "yernenis"
-		},
-		"Sftp1_properties_typeProperties_host": {
-			"type": "string",
-			"defaultValue": "S:\\Projects"
-		},
-		"Sftp1_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "yernenis"
 		}
@@ -412,33 +400,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/linkedService1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Sftp1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "Sftp",
-				"typeProperties": {
-					"host": "[parameters('Sftp1_properties_typeProperties_host')]",
-					"port": "21",
-					"skipHostKeyValidation": true,
-					"authenticationType": "Basic",
-					"userName": "[parameters('Sftp1_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('Sftp1_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
 			]
 		},
 		{
