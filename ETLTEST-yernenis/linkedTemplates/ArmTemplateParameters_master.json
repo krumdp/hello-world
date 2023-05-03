@@ -17,9 +17,6 @@
 		"MSIData_connectionString": {
 			"value": ""
 		},
-		"Oracle_azure_connectionString": {
-			"value": ""
-		},
 		"Sftp1_password": {
 			"value": ""
 		},
