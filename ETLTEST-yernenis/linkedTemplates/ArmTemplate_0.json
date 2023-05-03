@@ -31,10 +31,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'msi_test'"
 		},
-		"Oracle1_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'Oracle1'"
-		},
 		"Oracle_azure_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'Oracle_azure'"
@@ -423,25 +419,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Oracle1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "Oracle",
-				"typeProperties": {
-					"connectionString": "[parameters('Oracle1_connectionString')]"
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/Oracle_azure')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -760,27 +737,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Oracle_azure')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "Oracle_azure",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "OracleTable",
-				"schema": [],
-				"typeProperties": {
-					"schema": "COVID",
-					"table": "HEALTH_SCREENING"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/Oracle_azure')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/covid_response')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -843,9 +799,15 @@
 								}
 							},
 							"sink": {
-								"type": "OracleSink",
-								"writeBatchSize": 10000,
-								"maxConcurrentConnections": 100
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
 							},
 							"enableStaging": false,
 							"parallelCopies": 7,
@@ -858,8 +820,8 @@
 											"ordinal": 1
 										},
 										"sink": {
-											"name": "HEALTH_SCREENING_ID",
-											"type": "Double"
+											"type": "Double",
+											"ordinal": 1
 										}
 									},
 									{
@@ -868,8 +830,8 @@
 											"ordinal": 2
 										},
 										"sink": {
-											"name": "TITLE",
-											"type": "String"
+											"type": "String",
+											"ordinal": 2
 										}
 									},
 									{
@@ -878,8 +840,8 @@
 											"ordinal": 3
 										},
 										"sink": {
-											"name": "USERNAME",
-											"type": "String"
+											"type": "String",
+											"ordinal": 3
 										}
 									},
 									{
@@ -888,8 +850,8 @@
 											"ordinal": 5
 										},
 										"sink": {
-											"name": "SUPERVISOR_NET_ID",
-											"type": "String"
+											"type": "String",
+											"ordinal": 4
 										}
 									},
 									{
@@ -898,8 +860,8 @@
 											"ordinal": 4
 										},
 										"sink": {
-											"name": "SUPERVISOR",
-											"type": "String"
+											"type": "String",
+											"ordinal": 5
 										}
 									},
 									{
@@ -908,8 +870,8 @@
 											"ordinal": 6
 										},
 										"sink": {
-											"name": "JOB_TITLE",
-											"type": "String"
+											"type": "String",
+											"ordinal": 6
 										}
 									},
 									{
@@ -918,8 +880,8 @@
 											"ordinal": 7
 										},
 										"sink": {
-											"name": "EMAIL",
-											"type": "String"
+											"type": "String",
+											"ordinal": 7
 										}
 									},
 									{
@@ -928,8 +890,8 @@
 											"ordinal": 8
 										},
 										"sink": {
-											"name": "SUBMISSION_TIME",
-											"type": "DateTime"
+											"type": "DateTime",
+											"ordinal": 8
 										}
 									},
 									{
@@ -938,8 +900,8 @@
 											"ordinal": 9
 										},
 										"sink": {
-											"name": "BREATHING",
-											"type": "String"
+											"type": "String",
+											"ordinal": 9
 										}
 									},
 									{
@@ -948,8 +910,8 @@
 											"ordinal": 10
 										},
 										"sink": {
-											"name": "FEVER",
-											"type": "String"
+											"type": "String",
+											"ordinal": 10
 										}
 									},
 									{
@@ -958,8 +920,8 @@
 											"ordinal": 11
 										},
 										"sink": {
-											"name": "COUGH",
-											"type": "String"
+											"type": "String",
+											"ordinal": 11
 										}
 									},
 									{
@@ -968,8 +930,8 @@
 											"ordinal": 12
 										},
 										"sink": {
-											"name": "CHILL",
-											"type": "String"
+											"type": "String",
+											"ordinal": 12
 										}
 									},
 									{
@@ -978,8 +940,8 @@
 											"ordinal": 13
 										},
 										"sink": {
-											"name": "MUSCLE_ACHE",
-											"type": "String"
+											"type": "String",
+											"ordinal": 13
 										}
 									},
 									{
@@ -988,8 +950,8 @@
 											"ordinal": 14
 										},
 										"sink": {
-											"name": "HEADACHE",
-											"type": "String"
+											"type": "String",
+											"ordinal": 14
 										}
 									},
 									{
@@ -998,8 +960,8 @@
 											"ordinal": 15
 										},
 										"sink": {
-											"name": "SORE_THROAT",
-											"type": "String"
+											"type": "String",
+											"ordinal": 15
 										}
 									},
 									{
@@ -1008,8 +970,8 @@
 											"ordinal": 16
 										},
 										"sink": {
-											"name": "LOSS_OF_SMELL_TASTE",
-											"type": "String"
+											"type": "String",
+											"ordinal": 16
 										}
 									},
 									{
@@ -1018,8 +980,8 @@
 											"ordinal": 17
 										},
 										"sink": {
-											"name": "TRAVEL",
-											"type": "String"
+											"type": "String",
+											"ordinal": 17
 										}
 									},
 									{
@@ -1028,8 +990,8 @@
 											"ordinal": 18
 										},
 										"sink": {
-											"name": "COVID_CONTACT",
-											"type": "String"
+											"type": "String",
+											"ordinal": 18
 										}
 									},
 									{
@@ -1038,8 +1000,8 @@
 											"ordinal": 19
 										},
 										"sink": {
-											"name": "BUILDING",
-											"type": "String"
+											"type": "String",
+											"ordinal": 19
 										}
 									},
 									{
@@ -1048,8 +1010,8 @@
 											"ordinal": 20
 										},
 										"sink": {
-											"name": "SINGLE_BUILDING",
-											"type": "String"
+											"type": "String",
+											"ordinal": 20
 										}
 									},
 									{
@@ -1058,8 +1020,8 @@
 											"ordinal": 21
 										},
 										"sink": {
-											"name": "MULTIPLE_BUILDING",
-											"type": "String"
+											"type": "String",
+											"ordinal": 21
 										}
 									},
 									{
@@ -1068,8 +1030,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "EDW_CREATED_BY",
-											"type": "String"
+											"type": "String",
+											"ordinal": 22
 										}
 									},
 									{
@@ -1078,8 +1040,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "EDW_CREATE_DATE",
-											"type": "DateTime"
+											"type": "DateTime",
+											"ordinal": 23
 										}
 									},
 									{
@@ -1088,8 +1050,8 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "EDW_LAST_UPDATED_BY",
-											"type": "String"
+											"type": "String",
+											"ordinal": 24
 										}
 									},
 									{
@@ -1098,11 +1060,16 @@
 											"type": "String"
 										},
 										"sink": {
-											"name": "EDW_LAST_UPDATE_DATE",
-											"type": "DateTime"
+											"type": "DateTime",
+											"ordinal": 25
 										}
 									}
-								]
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
 							}
 						},
 						"inputs": [
@@ -1114,7 +1081,7 @@
 						],
 						"outputs": [
 							{
-								"referenceName": "Oracle_azure",
+								"referenceName": "covidresponse",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -1129,8 +1096,7 @@
 				"lastPublishTime": "2020-06-13T00:16:32Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/covidresponse')]",
-				"[concat(variables('factoryId'), '/datasets/Oracle_azure')]"
+				"[concat(variables('factoryId'), '/datasets/covidresponse')]"
 			]
 		},
 		{
@@ -1407,6 +1373,62 @@
 				"[concat(variables('factoryId'), '/pipelines/covid_response')]",
 				"[concat(variables('factoryId'), '/datasets/BinaryDataSource_File')]",
 				"[concat(variables('factoryId'), '/datasets/BinaryDataDestination')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/covid-trigger')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": {
+								"value": "@pipeline().parameters.waittime",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "MoveFiles_copy_EDW",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Wait1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "MoveFiles_copy_EDW",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"parameters": {
+					"waittime": {
+						"type": "int"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2020-06-13T00:54:30Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/MoveFiles_copy_EDW')]"
 			]
 		}
 	]
